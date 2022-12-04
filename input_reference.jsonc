@@ -39,13 +39,19 @@
             // The character range to export from the font, defaults to 32-126 if not provided
             "Range": [32, 126],
 
-            // The amount of padding to use for the font, defaults to {L: 2, R: 2, U: 0, D: 2}
+            // The amount of padding to use for the font, defaults to {L: 2, R: 2, U: 0, D: 2} if not provided
             "Padding": {
                 "Left": 4,
                 "Right": 4,
                 "Up": 2,
                 "Down": 8
-            }
+            },
+
+            // The types of styling to apply to the font, can be "none", "bold", or "italic", defaults to "none" if not provided
+            "Style": [
+                "bold",
+                "italic"
+            ]
         },
         {
             "File": "Medium",

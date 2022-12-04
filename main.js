@@ -86,11 +86,11 @@ for(let i = 0, _ = process.argv.splice(2); i < _.length; i += 2) {
 const DEFAULT_SIZE = 1024, EXPORT_PATH = "export\\", YAL_EXEC = "depend\\BmFontToYY23.exe", BMFONT_EXEC = "depend\\bmfont64.com";
 try {
     if (!fs.existsSync(BMFONT_EXEC)) {
-        throw `Could not find BMFont executable in ${BMFONT_EXEC}`;
+        throw `Could not find BMFont executable at ${BMFONT_EXEC}`;
     }
 
     if (!fs.existsSync(YAL_EXEC)) {
-        throw `Could not find BMFontToYY23.exe in ${YAL_EXEC}`;
+        throw `Could not find BMFontToYY23 executable at ${YAL_EXEC}`;
     }
     
     const input = arg.input;
@@ -134,12 +134,12 @@ try {
     }
 
     // Copy BMFC as temp 
-    const config_file = config.File ?? "gm23.bmfc";
+    const config_file = config.File ?? path.join("depend", "gm23.bmfc");
     if (!fs.existsSync(config_file)) {
         throw `Could not create config, configuration file could not be found`;
     }
 
-    const temp_file = path.dirname(config_file) + "/" + "TEMP.bmfc";
+    const temp_file = path.join(path.dirname(config_file), "TEMP.bmfc");
     if (!fs.existsSync(temp_file)) {
         fs.copyFileSync(config_file, temp_file);
     }
@@ -171,9 +171,7 @@ try {
     }
     
     // Dummy project
-    const project = getProject();
-
-    const scale = config.Scale ?? 1, time = performance.now();
+    const project = getProject(), scale = config.Scale ?? 1, time = performance.now();
     for(let i = 0; i < fonts.length; i++) {
         const font = fonts[i];
         rewriteProperty(temp, "fontName", font.Name);
@@ -187,10 +185,15 @@ try {
         rewriteProperty(temp, "paddingUp", padding.Up);
         rewriteProperty(temp, "paddingRight", padding.Right);
         rewriteProperty(temp, "paddingLeft", padding.Left);
+
+        const style = font.Style ?? ["none"];
+        rewriteProperty(temp, "isBold", style.includes("bold") ? 1 : 0);
+        rewriteProperty(temp, "isItalic", style.includes("italic") ? 1 : 0);
+
         fs.writeFileSync(temp_file, temp.join("\n"));
 
         const name = (config.Prefix ?? "fnt") + (font.File ?? font.Name.replace(" ", "_")) + (config.Postfix ?? "");
-        console.log(`- Generating ${name}.fnt from ${font.Name} (Size: ${font.Size}px${scale > 1 ? " (*" + scale + ")" : ""}, Range: ${range})`);        
+        console.log(`- Generating ${name}.fnt from ${font.Name} (Size: ${font.Size}px${scale > 1 ? " (*" + scale + ")" : ""}, Range: ${range}, Style: ${style.join(",")})`);        
         child_process.spawnSync(`${BMFONT_EXEC}`, ["-c", "depend\\TEMP.bmfc", "-o", `${path.join(bmfont_path, name)}.fnt`]);
 
         const font_folder = path.join(font_path, name);
@@ -219,8 +222,8 @@ try {
     // Create project
     console.log(`- Generating export.yyp for ${fonts.length} fonts`);
     fs.writeFileSync(path.join(EXPORT_PATH, "export.yyp"), JSON.stringify(project, undefined, 4));
-
     console.log(`Exported ${fonts.length} fonts in ${Math.round(performance.now() - time)}ms`);
+    process.exit(1);
 } catch (e) {
     console.error(`An exception in font-gen occured:\n- ${e}`);
     process.exit(1);
