@@ -1,31 +1,3 @@
-# font-gen
- A simple command-line tool to generate GameMaker 2.3+ compatible bitmap fonts
-
-# Setup
-1. Ensure that Node.js is installed by using the `node -v` command in any terminal, otherwise install [Node.js](https://nodejs.org/en/download/)
-2. Download [BMFont](https://www.angelcode.com/products/bmfont/) and extract both `bmfont64.com` and `bmfont64.exe` to the `depend/` folder
-3. (*OPTIONAL*) Open BMFont and modify the `gm23.bmfc` file to your liking, though this should already be setup for GameMaker compatibility
-4. Donate and download [BMFont to GameMaker converter](https://yellowafterlife.itch.io/gamemaker-bmfont) from [YellowAfterlife](yal.cc) and extract the following files to the `depend/` folder:
-    - `neko.dll`
-    - `gcmt-dll.dll`
-    - `std.ndll`
-    - `regexp.ndll`
-    - `BmFontToYY23.n`
-    - `BmFontToYY23.exe`
-
-# Usage
-1. Create an `input.json` file in the root directory, see `input_template.json` contains a barebores layout of the file
-2. Modify `input.json` to your heart's content
-3. Open a terminal in the root and run `node main.js -input input.json`
-4. Watch the output, once the program has finished a "Exported X fonts in Xms" message will be displayed
-5. Check the `export/` folder for `export.yyp` and respective folders inside of `export/fonts/` for each of your fonts.
-6. Modify any `.png` files prior to importing into your project.
-5. Open your GameMaker project, right-click the asset tree, and select "Add Existing". Navigate to the aforementioned `fonts` folder and select the `.yy` of the font you want to add
-6. Voila! The font should be usable in your project now. 
-
-# input.json
-Below is a commented variation of the `input.json` file with every possible field
-```jsonc
 {
     // Optional
     "Configuration": {
@@ -82,9 +54,3 @@ Below is a commented variation of the `input.json` file with every possible fiel
         }
     ]
 }
-```
-
-# Special Thanks
-[BMFont](https://www.angelcode.com/products/bmfont/) by [Andreas Jönsson](https://www.angelcode.com/contact.html)
-
-[BMFont to GameMaker converter](https://yellowafterlife.itch.io/gamemaker-bmfont) by [YellowAfterlife](https://yal.cc/about/)

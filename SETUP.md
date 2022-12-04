@@ -1,6 +1,3 @@
-# font-gen
- A simple command-line tool to generate GameMaker 2.3+ compatible bitmap fonts
-
 # Setup
 1. Ensure that Node.js is installed by using the `node -v` command in any terminal, otherwise install [Node.js](https://nodejs.org/en/download/)
 2. Download [BMFont](https://www.angelcode.com/products/bmfont/) and extract both `bmfont64.com` and `bmfont64.exe` to the `depend/` folder
@@ -83,8 +80,3 @@ Below is a commented variation of the `input.json` file with every possible fiel
     ]
 }
 ```
-
-# Special Thanks
-[BMFont](https://www.angelcode.com/products/bmfont/) by [Andreas Jönsson](https://www.angelcode.com/contact.html)
-
-[BMFont to GameMaker converter](https://yellowafterlife.itch.io/gamemaker-bmfont) by [YellowAfterlife](https://yal.cc/about/)

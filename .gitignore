@@ -1,0 +1,12 @@
+# Exports
+export/
+
+# Local
+input.json
+
+# Binaries
+*.exe
+*.com
+*.n
+*.dll
+*.ndll
