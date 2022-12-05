@@ -20,8 +20,9 @@
 4. Watch the output, once the program has finished a "Exported X fonts in Xms" message will be displayed
 5. Check the `export/` folder for `export.yyp` and respective folders inside of `export/fonts/` for each of your fonts.
 6. Modify any `.png` files prior to importing into your project.
-5. Open your GameMaker project, right-click the asset tree, and select "Add Existing". Navigate to the aforementioned `fonts` folder and select the `.yy` of the font you want to add
-6. Voila! The font should be usable in your project now. 
+7. Open `export.yyp` and select `Tools > Create Local Package` to create a local package containing the newly generated fonts
+8. Open your GameMaker project and select `Tools > Import Local Package` to import your fonts
+9. Voila! The font should be usable in your project now. 
 
 # input.json
 Below is a commented variation of the `input.json` file with every possible field
