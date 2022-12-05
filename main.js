@@ -68,7 +68,15 @@ function getProject() {
             children: []
         },
         RoomOrderNodes: [],
-        Folders: [],
+        Folders: [
+            {
+                resourceType: "GMFolder",
+                resourceVersion: "1.0",
+                name: "Fonts",
+                order: 0,
+                folderPath: "folders/Assets.yy"
+            }
+        ],
         AudioGroups: [],
         TextureGroups: [],
         IncludedFiles: [],
